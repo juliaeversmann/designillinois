@@ -69,7 +69,7 @@ menu > a {
 
 .hero > img {
   flex: 1;
-  background-color: var(--accent-yellow);
+  /* background-color: var(--accent-yellow); */
 }
 
 .info-section {
