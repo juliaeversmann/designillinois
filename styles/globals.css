@@ -3,6 +3,64 @@
   --text-color: white;
   --accent-orange: #f2594b;
   --accent-yellow: #f2ae31;
+  --accent-green: #008802;
+  --accent-blue: #0388a6;
+  --accent-pink: #ff48a2;
+
+  --default-padding: 3vw;
+
+  font-family: "neuzeit-grotesk", sans-serif;
+  /* font-family: "Comic Sans MS", cursive; */
+  scroll-behavior: smooth;
+
+  --menu-height: 5em;
+
+  --rotation-duration: 500s;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating var(--rotation-duration) linear infinite;
+  -moz-animation: rotating var(--rotation-duration) linear infinite;
+  -ms-animation: rotating var(--rotation-duration) linear infinite;
+  -o-animation: rotating var(--rotation-duration) linear infinite;
+  animation: rotating var(--rotation-duration) linear infinite;
+  z-index: 0;
+  scale: 2.2;
+}
+
+:root {
+  /* pretty colors */
+  --text-color: white;
+  --accent-orange: #f2594b;
+  --accent-yellow: #f2ae31;
   --accent-green: #7aac30;
   --accent-blue: #0388a6;
   --accent-pink: #ff48a2;
@@ -10,7 +68,18 @@
   --default-padding: 3vw;
 
   font-family: "neuzeit-grotesk", sans-serif;
+  /* font-family: "Comic Sans MS", cursive; */
   scroll-behavior: smooth;
+
+  --menu-height: 5em;
+}
+.inner {
+  position: absolute;
+}
+html {
+  scroll-padding-top: 4em;
+
+  background-color: var(--accent-yellow);
 }
 
 body {
@@ -37,40 +106,59 @@ p {
   font-size: 2vw;
 }
 
-menu {
+.menuContainer {
+  width: 100vw;
   background-color: purple;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+}
+menu {
   color: var(--text-color);
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 5vw;
-  justify-content: center;
-  margin: 0;
+  width: 90%;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0;
-  gap: 35vw;
-  position: fixed;
 }
 
 menu > a {
   align-self: center;
-  font-size: 2vw;
+  font-size: 200%;
   color: var(--text-color);
   text-decoration: none;
 }
 
 .hero {
+  /* background-image: url(../images/patterns/pattern1-07.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+  background-position-x: -2em;
+  background-size: cover; */
+  z-index: 1;
+  overflow: hidden;
+
   background-color: var(--accent-orange);
-  height: 50vw;
+  height: 100vh;
   margin: 0;
   display: flex;
   flex-direction: row;
+  /* margin-top: 2em; */
 }
 
 .hero > h1 {
+  z-index: 1;
   flex: 2;
+  /* TODO change to a percentage */
   font-size: 9vw;
-  margin-top: 10vw;
+  /* margin-top: 10vw; */
+  margin-top: 1em;
   padding: var(--default-padding);
+  margin-top: 10%;
+  margin-bottom: auto;
 }
 
 .hero > img {
@@ -79,7 +167,7 @@ menu > a {
 }
 
 .info-section {
-  height: 45vw;
+  height: 100vh;
   display: flex;
   flex-direction: row;
 }
@@ -101,10 +189,45 @@ menu > a {
   background-color: var(--accent-green);
 }
 
-.fun-pattern {
-  background-color: var(--accent-yellow);
-  overflow: hidden;
-  height: 100%;
+.scroll-parent {
+  position: relative;
+  width: 100vw;
+  height: 20rem;
+  overflow-x: hidden;
+}
+
+.scroll-element {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+
+.primary {
+  animation: primary 5s linear infinite;
+}
+
+.secondary {
+  animation: secondary 5s linear infinite;
+}
+
+@keyframes primary {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -100%;
+  }
+}
+
+@keyframes secondary {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
 }
 
 span > h2 {
@@ -116,18 +239,33 @@ span > h2 {
 }
 
 .directory-row {
-  display: flex;
-  height: 18vw;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  /* height: 18vw; */
+  flex-wrap: wrap;
+  max-width: 100vw;
 }
 
 .directory-row > a {
+  display: inline-block;
+  aspect-ratio: 1;
+  /* height: 100%; */
+
   color: var(--text-color);
-  font-size: 2.2vw;
+
+  font-size: 200%;
   text-decoration: none;
-  padding-top: var(--default-padding);
-  padding-left: var(--default-padding);
-  padding-right: var(--default-padding);
+  padding: var(--default-padding);
+  overflow: hidden;
+}
+
+.sectionHeader {
+  background-color: purple;
+  padding: 2em;
+}
+
+.sectionHeader > h2 {
+  margin: 0;
 }
 
 .student {
@@ -153,4 +291,73 @@ span > h2 {
 
 #orange {
   background-color: var(--accent-orange);
+}
+
+/* adjust for mobile */
+
+@media only screen and (max-width: 650px) {
+  :root {
+    --rotation-duration: 200s;
+  }
+  menu > a {
+    /* TODO change to a percentage */
+
+    font-size: 175%;
+  }
+
+  menu {
+    height: 6vw;
+  }
+
+  .info-section {
+    flex-direction: column;
+    height: unset;
+  }
+
+  h2 {
+    /* TODO change to a percentage */
+
+    font-size: 7vw;
+  }
+
+  p {
+    /* TODO change to a percentage */
+
+    font-size: 5vw;
+    line-height: 1.2;
+  }
+
+  .hero {
+    height: 60vh;
+    background-position-x: -82%;
+    background-size: 110%;
+    background-position-y: 16%;
+  }
+
+  .hero > h1 {
+    font-size: 350%;
+    padding: 0.3em;
+    margin-top: 1em;
+  }
+
+  .directory-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .directory-row > a {
+    font-size: 100%;
+    white-space: wrap;
+  }
+
+  #about,
+  #when-where {
+    padding-bottom: 2em;
+  }
+
+  .rotating {
+    scale: 1;
+  }
+
+  .sectionHeader {
+    padding: var(--default-padding);
+  }
 }
